@@ -1,7 +1,10 @@
 require("dotenv").config();
 
-const PORT = process.env.PORT || 8080;
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const { CLIENT_ID, CLIENT_SECRET, PORT } = process.env;
 
-export default { PORT, CLIENT_ID, CLIENT_SECRET };
+if (!CLIENT_ID || !CLIENT_SECRET) {
+  console.warn("Missing some of the environment variables.");
+  process.exit(1);
+}
+
+export default { CLIENT_ID, CLIENT_SECRET, PORT: PORT || 8080 };
